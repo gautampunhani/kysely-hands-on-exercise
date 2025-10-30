@@ -1,20 +1,28 @@
 
 import 'reflect-metadata';
-import { Migrator, FileMigrationProvider } from '@kysely/migrator';
+import { Migrator, FileMigrationProvider } from 'kysely';
 import { Kysely } from 'kysely';
-import { PostgresDialect } from '@kysely/postgres';
+import { PostgresDialect } from 'kysely';
 import { Pool } from 'pg';
 import * as path from 'path';
 import * as dotenv from 'dotenv';
+import { promises as fs } from 'fs'
+
 dotenv.config();
 const pool = new Pool({
   connectionString: process.env.DATABASE_URL ||
     `postgres://${process.env.POSTGRES_USER}:${process.env.POSTGRES_PASSWORD}@${process.env.POSTGRES_HOST}:${process.env.POSTGRES_PORT}/${process.env.POSTGRES_DB}`
 });
 const db = new Kysely({ dialect: new PostgresDialect({ pool }) as any } as any);
+console.info(__dirname)
+const migrationProvider = new FileMigrationProvider({
+  fs, // This is required
+  path, // This is required
+  migrationFolder: path.join(__dirname, 'migrations'),
+})
 const migrator = new Migrator({
   db,
-  provider: new FileMigrationProvider({ path: path.resolve(__dirname, 'migrations') as any } as any) as any,
+  provider: migrationProvider,
 });
 async function run() {
   const cmd = process.argv[2] || 'up';

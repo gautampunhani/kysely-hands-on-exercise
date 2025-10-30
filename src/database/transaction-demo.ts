@@ -1,7 +1,7 @@
 
 import 'reflect-metadata';
 import { Kysely, sql } from 'kysely';
-import { PostgresDialect } from '@kysely/postgres';
+import { PostgresDialect } from 'kysely';
 import { Pool } from 'pg';
 import * as dotenv from 'dotenv';
 import { randomUUID } from 'crypto';

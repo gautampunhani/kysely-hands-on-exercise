@@ -1,7 +1,7 @@
 
 import { Provider } from '@nestjs/common';
 import { Kysely } from 'kysely';
-import { PostgresDialect } from '@kysely/postgres';
+import { PostgresDialect } from 'kysely';
 import { Pool } from 'pg';
 import * as dotenv from 'dotenv';
 import type { Database } from '../types/db';
