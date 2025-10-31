@@ -27,5 +27,6 @@ dotenv.config();
     console.error('Transaction failed:', err);
   } finally {
     await db.destroy();
+    // await pool.end();
   }
 })();

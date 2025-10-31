@@ -15,6 +15,8 @@ export class UsersService implements OnModuleDestroy {
   }
 
   async findAll() {
+    // Type safety example
+    // return await this.db.selectFrom('users').select(['id', 'title']).where('id', '=', "1").executeTakeFirst()
     return await this.db.selectFrom('users').selectAll().execute();
   }
 

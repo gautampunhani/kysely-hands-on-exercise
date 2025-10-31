@@ -14,6 +14,7 @@
 - [Raw SQL Expressions](#raw-sql-expressions)
 - [Type Safety](#type-safety)
 - [Migrations](#migrations)
+- [Plugin Support] (#plugin-support)
 - [Advanced Features](#advanced-features)
 
 ## Introduction
@@ -213,3 +214,5 @@ const result = await db
   .select(({ fn, json }) => [fn.count('id').as('count'), json.buildObject({ id: 'users.id' }).as('meta')])
   .execute()
 ```
+
+## [Awesome Kysley](https://github.com/kysely-org/awesome-kysely)

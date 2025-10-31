@@ -8,24 +8,25 @@
 - `.gitignore` and `init_git.sh` to initialize a git repo locally.
 
 ## Quick start (local)
-1. Copy `.env.example` to `.env` and (for docker) set `DATABASE_URL=postgres://workshop:workshop@postgres:5432/workshop_db`
-2. Start Postgres and pgAdmin:
+1. Start postgres with `brew install postgresql@15` and     `brew services start postgresql@15`
+2. Copy `.env.example` to `.env` and (for docker) set `DATABASE_URL=postgres://workshop:workshop@postgres:5432/workshop_db`
+3. Start Postgres and pgAdmin:
    ```bash
    docker-compose up -d
    ```
-3. Install dependencies:
+4. Install dependencies:
    ```bash
    npm install
    ```
-4. Run migrations:
+5. Run migrations:
    ```bash
    npm run migrate:up
    ```
-5. Seed sample data (optional):
+6. Seed sample data (optional):
    ```bash
    npm run seed
    ```
-6. Start dev server:
+7. Start dev server:
    ```bash
    npm run start:dev
    ```
