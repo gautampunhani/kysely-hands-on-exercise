@@ -29,10 +29,3 @@
    ```bash
    npm run start:dev
    ```
-
-## Branches (recommended)
-- main: base working app
-- feature/kysely-joins: joins, aliasing, typed subqueries
-- feature/transactions: typed transactions demo
-- feature/migrations-seeding: extra migrations & seed data
-- feature/validation: DTO validation with class-validator
