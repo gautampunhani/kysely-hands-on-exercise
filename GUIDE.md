@@ -17,36 +17,41 @@
 - [Advanced Features](#advanced-features)
 
 ## Introduction
-Kysely is a type-safe and flexible SQL query builder for TypeScript. It allows you to write SQL queries using a fluent, composable API with full TypeScript inference.
+Kysely is a type-safe and flexible SQL query builder for TypeScript. It allows you to write SQL queries using a fluent, composable API with full TypeScript inference. Unlike ORMs that abstract away SQL, Kysely embraces SQL while providing full type safety and autocompletion.
 
-```typescript
-import { Kysely, SqliteDialect } from 'kysely'
-import Database from 'better-sqlite3'
-
-interface DB {
-  users: {
-    id: number
-    name: string
-    email: string
-  }
-}
-
-const db = new Kysely<DB>({
-  dialect: new SqliteDialect({ database: new Database(':memory:') }),
-})
-```
-
----
+**Key Benefits:**
+- 🛡️ 100% type-safe queries
+- 🔍 Full autocompletion
+- 🚀 No runtime overhead
+- 📖 SQL-like syntax
+- 🔧 Extensible and modular
 
 ## Setup & Configuration
-Kysely supports multiple SQL dialects such as PostgreSQL, MySQL, SQLite, and more.
+Configure Kysely with your database. Kysely supports multiple SQL dialects such as PostgreSQL, MySQL, SQLite, and more.
 
 ```typescript
 import { Kysely, PostgresDialect } from 'kysely'
 import { Pool } from 'pg'
 
-const db = new Kysely<DB>({
-  dialect: new PostgresDialect({ pool: new Pool() }),
+// Define your database schema
+interface Database {
+  users: UserTable
+  posts: PostTable
+  profiles: ProfileTable
+}
+
+// Initialize Kysely
+const db = new Kysely<Database>({
+  dialect: new PostgresDialect({
+    pool: new Pool({
+      database: 'workshop_db',
+      host: 'localhost',
+      user: 'workshop',
+      password: 'workshop',
+      port: 5432,
+      max: 10,
+    })
+  })
 })
 ```
 
