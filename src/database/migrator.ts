@@ -7,13 +7,14 @@ import { Pool } from 'pg';
 import * as path from 'path';
 import * as dotenv from 'dotenv';
 import { promises as fs } from 'fs'
+import { Database } from '../types/db';
 
 dotenv.config();
 const pool = new Pool({
   connectionString: process.env.DATABASE_URL ||
     `postgres://${process.env.POSTGRES_USER}:${process.env.POSTGRES_PASSWORD}@${process.env.POSTGRES_HOST}:${process.env.POSTGRES_PORT}/${process.env.POSTGRES_DB}`
 });
-const db = new Kysely({ dialect: new PostgresDialect({ pool }) as any } as any);
+const db = new Kysely<Database>({ dialect: new PostgresDialect({ pool }) as any } as any);
 console.info(__dirname)
 const migrationProvider = new FileMigrationProvider({
   fs, // This is required
@@ -38,7 +39,7 @@ async function run() {
     console.log('Unknown command', cmd);
   }
   await db.destroy();
-  await pool.end();
+  // await pool.end();
 }
 run().catch(err => {
   console.error(err);

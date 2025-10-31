@@ -30,13 +30,6 @@
    npm run start:dev
    ```
 
-## Git setup
-Run the included script to initialize git and make the initial commit:
-```bash
-./init_git.sh
-```
-The script will create a `main` branch and place recommended branch names in `BRANCHES.md`.
-
 ## Branches (recommended)
 - main: base working app
 - feature/kysely-joins: joins, aliasing, typed subqueries

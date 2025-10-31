@@ -5,13 +5,15 @@ import { PostgresDialect } from 'kysely';
 import { Pool } from 'pg';
 import * as dotenv from 'dotenv';
 import { randomUUID } from 'crypto';
+import { Database } from '../types/db';
+
 dotenv.config();
 (async function demo() {
   const pool = new Pool({
     connectionString: process.env.DATABASE_URL ||
       `postgres://${process.env.POSTGRES_USER}:${process.env.POSTGRES_PASSWORD}@${process.env.POSTGRES_HOST}:${process.env.POSTGRES_PORT}/${process.env.POSTGRES_DB}`
   });
-  const db = new Kysely({ dialect: new PostgresDialect({ pool }) as any } as any);
+  const db = new Kysely<Database>({ dialect: new PostgresDialect({ pool }) as any } as any);
   try {
     await db.transaction().execute(async (trx) => {
       const userId = randomUUID();
@@ -25,6 +27,5 @@ dotenv.config();
     console.error('Transaction failed:', err);
   } finally {
     await db.destroy();
-    await pool.end();
   }
 })();
