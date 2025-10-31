@@ -3,9 +3,8 @@
 
 ## What this package contains
 - Source code for a small NestJS app using Fastify and Kysely (TypeScript).
-- Docker Compose to run Postgres + pgAdmin.
+- Docker Compose to run Postgres
 - Migrations, seed script, sample typed queries, posts module to demo joins.
-- `.gitignore` and `init_git.sh` to initialize a git repo locally.
 
 ## Quick start (local)
 1. Start postgres with `brew install postgresql@15` and     `brew services start postgresql@15`
